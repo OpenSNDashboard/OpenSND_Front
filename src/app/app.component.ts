@@ -9,22 +9,8 @@ declare var twttr: any;
 })
 export class AppComponent {
   title = 'OpenSND';
-  tweetsId = [20, 21, 22, 23, 5000, 46581, 75315, 463440424141459456n];
 
-  ngAfterViewInit(): void {
-    this.loadTimeline();
-  }
+  constructor() {}
 
-  loadTimeline() {
-    this.tweetsId.forEach((element) => {
-      twttr.widgets.createTweet(
-        element.toString(),
-        document.getElementById('timeline'),
-        {
-          align: 'center',
-          lang: 'fr',
-        }
-      );
-    });
-  }
+  ngOnInit(): void {}
 }

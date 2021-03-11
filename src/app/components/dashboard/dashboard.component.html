@@ -1,0 +1,8 @@
+<ul *ngFor="let element of feed">
+  <div *ngIf="element.type === 'twitter'">
+    <li><app-card-twitter [post]="element"></app-card-twitter></li>
+  </div>
+  <div *ngIf="element.type === 'reddit'">
+    <li><app-card-reddit [post]="element"></app-card-reddit></li>
+  </div>
+</ul>

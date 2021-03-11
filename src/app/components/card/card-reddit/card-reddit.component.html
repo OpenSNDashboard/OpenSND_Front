@@ -1,0 +1,8 @@
+<p>Titre : {{ post.title }}</p>
+<p>Sub : {{ post.sub_display_name }}</p>
+<div *ngIf="post.selftext === ''">
+  <iframe [src]="post.url | safe" width="100%" height="100%"></iframe>
+</div>
+<p>Auteur : {{ post.author }}</p>
+<p>Date : {{ post.created_at }}</p>
+<p>upvotes : {{ post.upvotes }}</p>

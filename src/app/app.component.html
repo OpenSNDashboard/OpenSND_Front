@@ -1,23 +1,2 @@
-<div class="wrapper">
-  <h1>Salut !</h1>
-  <h2>Ceci est un test d'intégration d'une timeline !</h2>
-
-  <form action="">
-    <p>Nombre de colonne:</p>
-    <div>
-      <input type="radio" name="nbColumn" id="nbColumnChoice1" value="2" />
-      <label for="nbColumnChoice1">2</label>
-
-      <input
-        type="radio"
-        name="nbColumn"
-        id="nbColumnChoice2"
-        value="3"
-        checked
-      />
-      <label for="nbColumnChoice2">3</label>
-    </div>
-  </form>
-
-  <div id="timeline"></div>
-</div>
+<h1 id="main-content-header">{{ title }}</h1>
+<router-outlet></router-outlet>
