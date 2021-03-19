@@ -4,10 +4,10 @@ import { FEED } from '../mock-feed';
 @Injectable({
   providedIn: 'root',
 })
-export class DashboardService {
+export class FeedService {
   constructor() {}
 
-  getDashboard() {
+  getFeed() {
     return FEED;
   }
 }

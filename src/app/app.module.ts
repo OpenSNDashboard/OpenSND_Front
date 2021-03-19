@@ -5,7 +5,7 @@ import { AppComponent } from './app.component';
 import { CardComponent } from './components/card/card.component';
 import { CardRedditComponent } from './components/card/card-reddit/card-reddit.component';
 import { CardTwitterComponent } from './components/card/card-twitter/card-twitter.component';
-import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { FeedComponent } from './components/feed/feed.component';
 import { AppRoutingModule } from './app-routing.module';
 import { SafePipe } from './pipes/safe.pipe';
 
@@ -15,7 +15,7 @@ import { SafePipe } from './pipes/safe.pipe';
     CardComponent,
     CardRedditComponent,
     CardTwitterComponent,
-    DashboardComponent,
+    FeedComponent,
     SafePipe,
   ],
   imports: [BrowserModule, AppRoutingModule],

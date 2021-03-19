@@ -2,6 +2,7 @@
 <p>Sub : {{ post.sub_display_name }}</p>
 <div *ngIf="post.selftext === ''">
   <iframe [src]="post.url | safe" width="100%" height="100%"></iframe>
+  <!-- le pipe "safe" c'est pour dire à Angular d'autoriser l'embed de sources extérieur (voir pipes/safe.pipe.ts)-->
 </div>
 <p>Auteur : {{ post.author }}</p>
 <p>Date : {{ post.created_at }}</p>
