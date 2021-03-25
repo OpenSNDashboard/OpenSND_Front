@@ -1,10 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { FeedComponent } from './components/feed/feed.component';
+import { HomeComponent } from './components/home/home.component';
 
 const routes: Routes = [
-  { path: 'dashboard', component: FeedComponent },
-  { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
 ];
 
 @NgModule({

@@ -1,9 +1,40 @@
-<p>Titre : {{ post.title }}</p>
-<p>Sub : {{ post.sub_display_name }}</p>
-<div *ngIf="post.selftext === ''">
-  <iframe [src]="post.url | safe" width="100%" height="100%"></iframe>
-  <!-- le pipe "safe" c'est pour dire à Angular d'autoriser l'embed de sources extérieur (voir pipes/safe.pipe.ts)-->
+<div class="card">
+  <div class="upper-container">
+    <p class="mat-body-strong">r/{{ post.sub_display_name }}</p>
+    <p class="mat-small">- Posted by u/{{ post.author }}</p>
+  </div>
+  <div class="middle-container">
+    <h1>{{ post.title }}</h1>
+    <!-- On regarde si le texte du post est vide -->
+    <div *ngIf="post.selftext === ''; then thenBlock; else elseBlock"></div>
+    <!-- Si le text du post est vide-->
+    <ng-template #thenBlock>
+      <!-- On regarde quel est le type de media que le post contient -->
+      <div
+        *ngIf="post.url.includes('png'); then thenBlock; else elseBlock"
+      ></div>
+      <!-- Si c'est une image -->
+      <ng-template #thenBlock>
+        <a href="{{ post.url }}"
+          ><img src="{{ post.url }}" alt="Image associée au post"
+        /></a>
+      </ng-template>
+      <!-- Sinon, c'est une vidéo-->
+      <ng-template #elseBlock
+        >--------- Video Reddit, impossible à lire ---------</ng-template
+      ></ng-template
+    >
+    <!-- Sinon, on affiche le texte markdown-->
+    <ng-template #elseBlock
+      ><markdown ngPreserveWhitespaces>
+        {{ post.selftext }}
+      </markdown></ng-template
+    >
+  </div>
+  <div class="lower-container mat-small">
+    <p>{{ post.upvotes }} Upvotes</p>
+    <a href="https://reddit.com/{{ post.permalink }}"
+      >{{ post.comments }} Commentaires</a
+    >
+  </div>
 </div>
-<p>Auteur : {{ post.author }}</p>
-<p>Date : {{ post.created_at }}</p>
-<p>upvotes : {{ post.upvotes }}</p>

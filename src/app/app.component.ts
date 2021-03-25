@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { FormControl } from '@angular/forms';
 
-declare var twttr: any;
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',

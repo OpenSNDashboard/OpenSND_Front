@@ -1,0 +1,55 @@
+.card {
+  background-color: #f2f2f2;
+  border: 1px solid #343536;
+  padding: 10px 30px 10px 30px;
+  max-width: 1000px;
+
+  .upper-container {
+    display: flex;
+    align-items: center;
+
+    .mat-small {
+      margin-left: 5px;
+    }
+  }
+
+  .middle-container {
+    display: flex;
+    flex-direction: column;
+
+    a {
+      width: fit-content;
+      place-self: center center;
+
+      img {
+        max-width: 1000px;
+      }
+    }
+
+    markdown ::ng-deep ol {
+      margin-bottom: 12px;
+    }
+  }
+
+  .lower-container {
+    display: flex;
+    align-items: center;
+
+    a {
+      color: inherit;
+
+      &:hover {
+        color: #707070;
+        text-decoration: none;
+      }
+    }
+
+    p {
+      margin-bottom: 0;
+    }
+
+    *:not(:first-child) {
+      margin-left: 5px;
+    }
+  }
+}
