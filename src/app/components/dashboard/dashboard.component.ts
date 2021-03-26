@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getFeed() {
-    this.feed = FEED.filter((element) => element.type === 'reddit');
+    this.feed = FEED;
     //this.feed = this.dashboardService.getFeedFromDashboard(this.dashboard.id);
   }
 }

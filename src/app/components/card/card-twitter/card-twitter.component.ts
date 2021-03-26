@@ -7,9 +7,14 @@ import { CardTwitter } from 'src/app/model/card-twitter';
   styleUrls: ['./card-twitter.component.scss'],
 })
 export class CardTwitterComponent implements OnInit {
-  @Input() post!: CardTwitter;
+  @Input() post!: any;
+  @Input() embed: boolean = false;
 
   constructor() {}
 
   ngOnInit(): void {}
+
+  isDictionaryEmpty(obj: any): boolean {
+    return Object.keys(obj).length === 0;
+  }
 }

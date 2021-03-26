@@ -15,26 +15,26 @@
       ></div>
       <!-- Si c'est une image -->
       <ng-template #thenBlock>
-        <a href="{{ post.url }}"
-          ><img src="{{ post.url }}" alt="Image associée au post"
-        /></a>
+        <a href="{{ post.url }}">
+          <img src="{{ post.url }}" alt="Image associée au post" />
+        </a>
       </ng-template>
       <!-- Sinon, c'est une vidéo-->
-      <ng-template #elseBlock
-        >--------- Video Reddit, impossible à lire ---------</ng-template
-      ></ng-template
-    >
+      <ng-template #elseBlock>
+        --------- Video Reddit, impossible à lire ---------
+      </ng-template>
+    </ng-template>
     <!-- Sinon, on affiche le texte markdown-->
-    <ng-template #elseBlock
-      ><markdown ngPreserveWhitespaces>
+    <ng-template #elseBlock>
+      <markdown ngPreserveWhitespaces>
         {{ post.selftext }}
-      </markdown></ng-template
-    >
+      </markdown>
+    </ng-template>
   </div>
   <div class="lower-container mat-small">
     <p>{{ post.upvotes }} Upvotes</p>
-    <a href="https://reddit.com/{{ post.permalink }}"
-      >{{ post.comments }} Commentaires</a
-    >
+    <a href="https://reddit.com/{{ post.permalink }}">
+      {{ post.comments }} Commentaires
+    </a>
   </div>
 </div>

@@ -1,5 +1,222 @@
-<p>User : {{ post.user.screen_name }}</p>
-<p>Texte : {{ post.text }}</p>
-<p>Date : {{ post.created_at }}</p>
-<p>Nbr fav : {{ post.favorite_count }}</p>
-<p>Rt : {{ post.retweet_count }}</p>
+<!-- Est ce que le tweet est un retweet ? -->
+<div
+  *ngIf="
+    !isDictionaryEmpty(post.retweeted_status);
+    then thenBlock;
+    else elseBlock
+  "
+></div>
+<!-- Si oui, on affiche le tweet retweeté avec la mention "user a retweeté" -->
+<ng-template #thenBlock>
+  <div class="card">
+    <p>{{ post.retweeted_status.user.name }} a retweeté</p>
+    <div class="container-flex">
+      <img
+        class="profile-pic"
+        src="{{ post.retweeted_status.user.profile_image_url }}"
+        alt="Image de profil de l'utilisateur"
+      />
+      <div>
+        <div class="container-center">
+          <p class="mat-body-strong">{{ post.retweeted_status.user.name }}</p>
+          <p class="mat-small">@{{ post.retweeted_status.user.screen_name }}</p>
+          <p class="mat-small">
+            {{ post.retweeted_status.created_at.split(" ")[0] }}
+          </p>
+        </div>
+        <p>{{ post.retweeted_status.text }}</p>
+        <!-- Est ce que le tweet a un media attaché ? -->
+        <div *ngIf="post.medias.length > 0; then thenBlock">
+          <!-- Si oui, est ce que c'est une seule image ?-->
+          <div
+            *ngIf="
+              post.medias.length == 1 && post.medias[0].type == 'photo';
+              then thenBlock;
+              else elseBlock
+            "
+          ></div>
+          <!-- Si oui, on l'affiche -->
+          <ng-template #thenBlock>
+            <a href="{{ post.medias[0].url }}">
+              <img
+                class="media-image"
+                src="{{ post.medias[0].url }}"
+                alt="Image associée au tweet"
+              />
+            </a>
+          </ng-template>
+          <!-- Sinon, c'est une vidéo ou plusieurs image-->
+          <ng-template #elseBlock>
+            --------- Video ou plusieurs images, pas encore gérés ---------
+          </ng-template>
+        </div>
+        <div class="container-center mat-small">
+          <p>{{ post.retweeted_status.retweet_count }} RT</p>
+          <p>{{ post.retweeted_status.favorite_count }} Fav.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
+<!-- Si non, est ce que c'est une réponse ?-->
+<ng-template #elseBlock>
+  <div
+    *ngIf="
+      !isDictionaryEmpty(post.quoted_status);
+      then thenBlock;
+      else elseBlock
+    "
+  ></div>
+  <!-- Si oui, est ce que c'est une réponse à soi même ? -->
+  <ng-template #thenBlock>
+    <div
+      *ngIf="
+        post.quoted_status.user.name == post.user.name;
+        then thenBlock;
+        else elseBlock
+      "
+    ></div>
+    <!-- Si oui, c'est un thread -->
+    <ng-template #thenBlock>
+      --------- Thread, pas encore géré ---------
+    </ng-template>
+    <!-- Si non, on affiche le tweet de base avec le tweet quoté embed-->
+    <ng-template #elseBlock>
+      <div class="card container-flex">
+        <img
+          class="profile-pic"
+          src="{{ post.user.profile_image_url }}"
+          alt="Image de profil de l'utilisateur"
+        />
+        <div>
+          <div class="container-center">
+            <p class="mat-body-strong">{{ post.user.name }}</p>
+            <p class="mat-small">@{{ post.user.screen_name }}</p>
+            <p class="mat-small">{{ post.created_at.split(" ")[0] }}</p>
+          </div>
+          <p>{{ post.text }}</p>
+          <!-- Est ce que le tweet a un media attaché ? -->
+          <div *ngIf="post.medias.length > 0">
+            <!-- Si oui, est ce que c'est une seule image ?-->
+            <div
+              *ngIf="
+                post.medias.length == 1 && post.medias[0].type == 'photo';
+                then thenBlock;
+                else elseBlock
+              "
+            ></div>
+            <!-- Si oui, on l'affiche -->
+            <ng-template #thenBlock>
+              <a href="{{ post.medias[0].url }}">
+                <img
+                  class="media-image"
+                  src="{{ post.medias[0].url }}"
+                  alt="Image associée au tweet"
+                />
+              </a>
+            </ng-template>
+            <!-- Sinon, c'est une vidéo ou plusieurs image-->
+            <ng-template #elseBlock>
+              --------- Video ou plusieurs images, pas encore gérés ---------
+            </ng-template>
+          </div>
+          <div class="quoted card">
+            <div class="container-center">
+              <img
+                class="profile-pic"
+                src="{{ post.quoted_status.user.profile_image_url }}"
+                alt="Image de profil de l'utilisateur"
+              />
+              <p class="mat-body-strong">{{ post.quoted_status.user.name }}</p>
+              <p class="mat-small">
+                @{{ post.quoted_status.user.screen_name }}
+              </p>
+              <p class="mat-small">
+                {{ post.quoted_status.created_at.split(" ")[0] }}
+              </p>
+            </div>
+            <p>{{ post.quoted_status.text }}</p>
+            <!-- Est ce que le tweet a un media attaché ? -->
+            <div *ngIf="post.quoted_status.medias.length > 0">
+              <!-- Si oui, est ce que c'est une seule image ?-->
+              <div
+                *ngIf="
+                  post.quoted_status.medias.length == 1 &&
+                    post.quoted_status.medias[0].type == 'photo';
+                  then thenBlock;
+                  else elseBlock
+                "
+              ></div>
+              <!-- Si oui, on l'affiche -->
+              <ng-template #thenBlock>
+                <a href="{{ post.quoted_status.medias[0].url }}">
+                  <img
+                    class="media-image"
+                    src="{{ post.quoted_status.medias[0].url }}"
+                    alt="Image associée au tweet"
+                  />
+                </a>
+              </ng-template>
+              <!-- Sinon, c'est une vidéo ou plusieurs image-->
+              <ng-template #elseBlock>
+                --------- Video ou plusieurs images, pas encore gérés ---------
+              </ng-template>
+            </div>
+          </div>
+          <div class="container-center mat-small">
+            <p>{{ post.retweet_count }} RT</p>
+            <p>{{ post.favorite_count }} Fav.</p>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </ng-template>
+  <!-- Si non, on affiche le tweet de base-->
+  <ng-template #elseBlock>
+    <div class="card container-flex">
+      <img
+        class="profile-pic"
+        src="{{ post.user.profile_image_url }}"
+        alt="Image de profil de l'utilisateur"
+      />
+      <div>
+        <div class="container-center">
+          <p class="mat-body-strong">{{ post.user.name }}</p>
+          <p class="mat-small">@{{ post.user.screen_name }}</p>
+          <p class="mat-small">{{ post.created_at.split(" ")[0] }}</p>
+        </div>
+        <p>{{ post.text }}</p>
+        <!-- Est ce que le tweet a un media attaché ? -->
+        <div class="container-flex" *ngIf="post.medias.length > 0">
+          <!-- Si oui, est ce que c'est une seule image ?-->
+          <div
+            *ngIf="
+              post.medias.length == 1 && post.medias[0].type == 'photo';
+              then thenBlock;
+              else elseBlock
+            "
+          ></div>
+          <!-- Si oui, on l'affiche -->
+          <ng-template #thenBlock>
+            <a href="{{ post.medias[0].url }}">
+              <img
+                class="media-image"
+                src="{{ post.medias[0].url }}"
+                alt="Image associée au tweet"
+              />
+            </a>
+          </ng-template>
+          <!-- Sinon, c'est une vidéo ou plusieurs image-->
+          <ng-template #elseBlock>
+            --------- Video ou plusieurs images, pas encore gérés ---------
+          </ng-template>
+        </div>
+
+        <div class="container-center mat-small">
+          <p>{{ post.retweet_count }} RT</p>
+          <p>{{ post.favorite_count }} Fav.</p>
+        </div>
+      </div>
+    </div>
+  </ng-template>
+</ng-template>
