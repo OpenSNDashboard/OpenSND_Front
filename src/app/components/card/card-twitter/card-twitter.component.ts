@@ -3,7 +3,7 @@ import { CardTwitter } from 'src/app/model/card-twitter';
 
 @Component({
   selector: 'app-card-twitter',
-  templateUrl: './card-twitter.component.html',
+  templateUrl: './card-twitter.component copy.html',
   styleUrls: ['./card-twitter.component.scss'],
 })
 export class CardTwitterComponent implements OnInit {
@@ -15,6 +15,7 @@ export class CardTwitterComponent implements OnInit {
   ngOnInit(): void {}
 
   isDictionaryEmpty(obj: any): boolean {
+    console.log('la');
     return Object.keys(obj).length === 0;
   }
 }

@@ -20,12 +20,10 @@ export class MenuComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllDashboards();
-    console.log(this.dashboards);
   }
 
   getAllDashboards() {
     this.dashboardService.getAllDashboards().subscribe((data: any) => {
-      console.log('data :', data.dashboards);
       this.dashboards = data.dashboards;
     });
   }

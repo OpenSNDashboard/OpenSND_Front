@@ -8,17 +8,24 @@ import { FEED } from '../../mock-feed';
   styleUrls: ['./dashboard.component.scss'],
 })
 export class DashboardComponent implements OnInit {
-  feed: any;
+  feed: any = null;
   @Input() dashboard: any;
 
   constructor(private dashboardService: DashboardService) {}
 
-  ngOnInit(): void {
-    this.getFeed();
+  ngOnInit(): void {}
+
+  reloadFeed(dashboard: any) {
+    this.dashboardService
+      .getFeedFromDashboard(dashboard.id)
+      .subscribe((res: any) => {
+        this.feed = res.data; //.filter((post: any) => post.type == 'twitter');
+        console.log('this.feed', this.feed);
+      });
   }
 
-  getFeed() {
-    this.feed = FEED;
-    //this.feed = this.dashboardService.getFeedFromDashboard(this.dashboard.id);
+  clearDashboard() {
+    console.log('dashboardCleared');
+    this.feed = null;
   }
 }

@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { DashboardComponent } from '../dashboard/dashboard.component';
 
 @Component({
   selector: 'app-home',
@@ -7,12 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
   dashboardSelected: any = null;
+  @ViewChild(DashboardComponent) child!: DashboardComponent;
 
   constructor() {}
 
   ngOnInit(): void {}
 
   newDashboardSelected(dashboardEvent: any) {
-    console.log('dashboardEvent :', dashboardEvent);
+    console.log('newDashboardSelected');
+    this.child.clearDashboard();
+    this.child.reloadFeed(dashboardEvent);
   }
 }
