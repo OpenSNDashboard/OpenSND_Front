@@ -25,7 +25,7 @@ export class DashboardService {
 
   //TODO : prendre en compte le parametre since
   getFeedFromDashboard(id: number, since: string = '') {
-    const url = `${this.host}/${id}`;
+    const url = `${this.host}/${id}/content`;
 
     return this.http.get(url);
   }

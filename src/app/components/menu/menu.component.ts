@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import {
+  MatAccordionDisplayMode,
+  MatAccordionTogglePosition,
+} from '@angular/material/expansion';
 import { DashboardService } from '../../services/dashboard.service';
 
 @Component({
@@ -8,17 +12,25 @@ import { DashboardService } from '../../services/dashboard.service';
 })
 export class MenuComponent implements OnInit {
   dashboards: any;
+  displayMode: MatAccordionDisplayMode = 'flat';
+
+  @Output() newDashboardEvent = new EventEmitter<any>();
 
   constructor(private dashboardService: DashboardService) {}
 
   ngOnInit(): void {
-    // this.getAllDashboards();
-    // console.log(this.dashboards);
+    this.getAllDashboards();
+    console.log(this.dashboards);
   }
 
   getAllDashboards() {
     this.dashboardService.getAllDashboards().subscribe((data: any) => {
-      this.dashboards = data;
+      console.log('data :', data.dashboards);
+      this.dashboards = data.dashboards;
     });
+  }
+
+  newDashboardSelected(dashboard: any) {
+    this.newDashboardEvent.emit(dashboard);
   }
 }

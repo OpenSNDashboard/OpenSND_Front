@@ -1,14 +1,26 @@
 <div id="menu-container">
   <ul>
     <li>
-      Dashboards
-      <ul *ngFor="let dashboard of dashboards">
-        <li>
-          <button>dashboard.name</button>
-        </li>
-      </ul>
+      <mat-accordion [displayMode]="displayMode">
+        <mat-expansion-panel style="box-shadow: none">
+          <mat-expansion-panel-header style="padding: 0 16px">
+            <mat-panel-title class="font"> Dashboards </mat-panel-title>
+          </mat-expansion-panel-header>
+          <ul *ngFor="let dashboard of dashboards">
+            <li>
+              <button mat-button (click)="newDashboardSelected(dashboard)">
+                {{ dashboard.name }}
+              </button>
+            </li>
+          </ul>
+        </mat-expansion-panel>
+      </mat-accordion>
     </li>
-    <li>Gérer Dashboards</li>
-    <li>Options</li>
+    <li>
+      <button class="font" mat-button>Gérer Dashboards</button>
+    </li>
+    <li>
+      <button class="font" mat-button>Options</button>
+    </li>
   </ul>
 </div>

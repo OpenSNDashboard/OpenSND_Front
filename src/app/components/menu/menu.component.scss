@@ -1,0 +1,20 @@
+#menu-container {
+  margin: 0 20px 0 10px;
+
+  ul {
+    list-style: none;
+    padding: 0;
+  }
+
+  button {
+    height: 48px;
+    width: 100%;
+    display: block;
+    text-align: left;
+  }
+
+  .font {
+    font-size: 15px;
+    font-weight: 500;
+  }
+}

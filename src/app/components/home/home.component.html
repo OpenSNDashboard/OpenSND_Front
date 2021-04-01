@@ -1,4 +1,8 @@
-<div id="main-container">
-  <app-menu></app-menu>
-  <app-dashboard></app-dashboard>
-</div>
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened
+    ><app-menu (newDashboardEvent)="newDashboardSelected($event)"></app-menu
+  ></mat-sidenav>
+  <mat-sidenav-content>
+    <app-dashboard></app-dashboard>
+  </mat-sidenav-content>
+</mat-sidenav-container>
